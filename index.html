@@ -602,7 +602,7 @@
       "pflicht": true,
       "frage": "Welche Aussage passt am ehesten zu dir?",
       "antworten": [
-        "Ich kenne die Möglichkeiten, die mir KI bietet, und nutze sie",
+        "Ich kenne alle Möglichkeiten, die mir KI bietet, und nutze sie",
         "Ich sollte mich eigentlich mehr mit KI beschäftigen",
         "Ich nutze KI bewusst wenig",
         "KI ist für mich gerade kein Thema"
@@ -613,13 +613,13 @@
       "schritt": "f7a",
       "schluessel": "f7a_woher",
       "teil": 3,
-      "typ": "eine",
-      "pflicht": true,
+      "typ": "mehrere",
+      "pflicht": false,
       "frage": "Woher kommt das vor allem?",
+      "hilfe": "Mehrere Antworten möglich.",
       "antworten": [
         "Es wird von mir erwartet, etwa im Job, im Umfeld oder in den Medien",
         "Ich glaube, KI könnte mir viel abnehmen",
-        "Beides",
         "Sonstiges"
       ],
       "sonstiges": "f7a_sonstiges",
@@ -724,7 +724,7 @@
   var AUSSAGE_MEHR = 'Ich sollte mich eigentlich mehr mit KI beschäftigen';
   /* Alle Antworten auf F7 (der Test prüft, dass sie wörtlich dem Fragenkatalog entsprechen) */
   var AUSSAGEN = [
-    'Ich kenne die Möglichkeiten, die mir KI bietet, und nutze sie',
+    'Ich kenne alle Möglichkeiten, die mir KI bietet, und nutze sie',
     AUSSAGE_MEHR,
     'Ich nutze KI bewusst wenig',
     'KI ist für mich gerade kein Thema'
@@ -746,7 +746,7 @@
     { schluessel: 'f5_sonstiges', schritt: 'f5', art: 'sonstiges', zu: 'f5_gruende' },
     { schluessel: 'f6_wahrscheinlichkeit', schritt: 'f6', art: 'wahl' },
     { schluessel: 'f7_aussage', schritt: 'f7', art: 'wahl' },
-    { schluessel: 'f7a_woher', schritt: 'f7a', art: 'wahl' },
+    { schluessel: 'f7a_woher', schritt: 'f7a', art: 'liste' },
     { schluessel: 'f7a_sonstiges', schritt: 'f7a', art: 'sonstiges', zu: 'f7a_woher' },
     { schluessel: 'f7b_abgehalten', schritt: 'f7b', art: 'liste' },
     { schluessel: 'f7b_sonstiges', schritt: 'f7b', art: 'sonstiges', zu: 'f7b_abgehalten' },
