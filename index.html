@@ -1426,9 +1426,9 @@
       /* Beim Senden bleiben die Knöpfe fokussierbar (aria-disabled), damit der Fokus nicht verloren geht;
          die Handler prüfen sendetGerade */
       knopfWeiter.disabled = !sendetGerade && !weiterAktiv(f);
-      /* Bildschirme, die nach dem Antippen von selbst weitergehen (Einfachauswahl außer F9): Hauptknopf erst zeigen,
-         wenn eine Antwort gewählt ist. Läuft das automatische Weitergehen, bleibt der Zustand, wie er ist (kein Aufblitzen). */
-      if (autoTimer === null) knopfWeiter.classList.toggle('wartet', f.typ === 'eine' && id !== 'f9' && !istBeantwortet(f, zustand.antworten));
+      /* Kein automatisches Weitergehen mehr (Yannis, 13.10.): Antippen wählt nur aus, „Weiter“ ist immer sichtbar
+         und bei Pflichtfragen aktiv, sobald eine Antwort gewählt ist. */
+      knopfWeiter.classList.remove('wartet');
       sperre(knopfWeiter, sendetGerade);
       sperre(knopfZurueck, sendetGerade);
       sperre($('ueberspringen'), sendetGerade);
@@ -1643,11 +1643,8 @@
       if (!opt || !ausAktuellerFrage(opt)) return;
       var input = opt.querySelector('input');
       if (!input || e.target === input) return;
-      /* Erneutes Antippen einer schon gewählten Antwort geht ebenfalls weiter */
-      if (input.type === 'radio' && input.checked && Date.now() - zeigerZeit < 1000 && input.value !== 'Sonstiges') {
-        federn(opt);
-        planeAutoWeiter();
-      }
+      /* Erneutes Antippen einer schon gewählten Antwort federt nur, es geht nicht weiter */
+      if (input.type === 'radio' && input.checked && Date.now() - zeigerZeit < 1000) federn(opt);
     });
     inhalt.addEventListener('change', function (e) {
       var t = e.target, f = FRAGEN[aktuell()];
@@ -1665,8 +1662,6 @@
       federn(t.closest('.k-option'));
       if (t.value === 'Sonstiges' && t.checked && f.sonstiges) {
         if (perZeiger) setTimeout(function () { var s = $('sonstiges'); if (s) s.focus(); }, 60);
-      } else if (t.type === 'radio' && perZeiger) {
-        planeAutoWeiter();
       }
       fussAktualisieren();
       speichern();
